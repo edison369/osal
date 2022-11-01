@@ -9,6 +9,9 @@ add_library(osal_generic-rtems_impl OBJECT
 	src/bsp_console.c
 )
 
-# This BSP only works with "rtems" OS layer.
-# Confirming this reduces risk of accidental misconfiguration
-set(OSAL_EXPECTED_OSTYPE    "rtems" PARENT_SCOPE)
+# Link the RTEMS BSP with the "rtemscpu" system library
+#target_link_libraries(osal_public_api INTERFACE
+#      rtemscpu
+#)
+
+set_property(TARGET osal_generic-rtems_impl PROPERTY OSAL_EXPECTED_OSTYPE "rtems")
